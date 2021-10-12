@@ -82,10 +82,18 @@ class App extends Component {
     });
   };
 
-  sortByName = () => {
+  sortByName = (index) => {
     const newContacts = [...this.state.currentContacts];
     newContacts.sort((first, second) => {
-      return first.name.localeCompare(second.name);
+      let namesFirst = first.name.split(' ');
+      let namesSecond = second.name.split(' ');
+      if (namesFirst.length > 2 && index === 1) {
+        return namesFirst[index + 1].localeCompare(namesSecond[index]);
+      }
+      if (namesSecond.length > 2 && index === 1) {
+        return namesFirst[index].localeCompare(namesSecond[index + 1]);
+      }
+      return namesFirst[index].localeCompare(namesSecond[index]);
     });
     this.setState((previous) => {
       return {
@@ -108,9 +116,23 @@ class App extends Component {
     return (
       <div className="App">
         <h1>IronContacts</h1>
+        <button onClick={this.addRandomContact}>Add Random Contact</button>
+
         <div className="buttons-wrapper">
-          <button onClick={this.addRandomContact}>Add Random Contact</button>
-          <button onClick={this.sortByName}>Sort by name</button>
+          <button
+            onClick={() => {
+              this.sortByName(0);
+            }}
+          >
+            Sort by first name
+          </button>
+          <button
+            onClick={() => {
+              this.sortByName(1);
+            }}
+          >
+            Sort by last name
+          </button>
           <button onClick={this.sortByPopularity}>Sort by popularity</button>
         </div>
         <table>
