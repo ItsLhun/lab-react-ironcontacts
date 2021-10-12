@@ -32,7 +32,11 @@ class App extends Component {
             <p>{contact.popularity}</p>
           </td>
           <td>
-            <button onClick={this.handleContactRemoval(contact.name)}>
+            <button
+              onClick={() => {
+                this.handleContactRemoval(contact.name);
+              }}
+            >
               Delete
             </button>
           </td>
@@ -42,13 +46,19 @@ class App extends Component {
     return elements;
   };
   handleContactRemoval = (idName) => {
-    // const newContacts = [...this.state.currentContacts];
-    // const remainingContacts = [...this.state.remainingContacts];
-    // const removedContact = newContacts.findIndex()
-    // remainingContacts.push(newContacts.splice(randomNumber, 1)[0]);
-    // this.setState(currentState) => {
-    //   return {}
-    // }
+    const newContacts = [...this.state.currentContacts];
+    const remainingContacts = [...this.state.remainingContacts];
+    const removedContactIndex = newContacts.findIndex((elem) => {
+      return elem.name === idName;
+    });
+    remainingContacts.push(newContacts.splice(removedContactIndex, 1)[0]);
+
+    this.setState((previous) => {
+      return {
+        currentContacts: newContacts,
+        remainingContacts: remainingContacts
+      };
+    });
   };
 
   addRandomContact = () => {
