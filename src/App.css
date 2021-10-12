@@ -61,8 +61,15 @@ th {
   margin-bottom: 2em;
   width: 35em;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+button :not(button:first-child),
+button:last-child {
+  flex: 1 1 40%;
 }
 button {
+  margin: 0.5rem;
   background-color: white;
   border-radius: 0;
   border: 1px solid grey;

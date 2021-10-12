@@ -17,7 +17,7 @@ class App extends Component {
   displayContacts = () => {
     const elements = this.state.currentContacts.map((contact) => {
       return (
-        <tr key={`${contact.name}${Math.random()}`}>
+        <tr key={`${contact.name}`}>
           <td>
             <img
               className="profile-img"
@@ -31,10 +31,24 @@ class App extends Component {
           <td>
             <p>{contact.popularity}</p>
           </td>
+          <td>
+            <button onClick={this.handleContactRemoval(contact.name)}>
+              Delete
+            </button>
+          </td>
         </tr>
       );
     });
     return elements;
+  };
+  handleContactRemoval = (idName) => {
+    // const newContacts = [...this.state.currentContacts];
+    // const remainingContacts = [...this.state.remainingContacts];
+    // const removedContact = newContacts.findIndex()
+    // remainingContacts.push(newContacts.splice(randomNumber, 1)[0]);
+    // this.setState(currentState) => {
+    //   return {}
+    // }
   };
 
   addRandomContact = () => {
@@ -56,12 +70,37 @@ class App extends Component {
       };
     });
   };
+
+  sortByName = () => {
+    const newContacts = [...this.state.currentContacts];
+    newContacts.sort((first, second) => {
+      return first.name.localeCompare(second.name);
+    });
+    this.setState((previous) => {
+      return {
+        currentContacts: newContacts
+      };
+    });
+  };
+  sortByPopularity = () => {
+    const newContacts = [...this.state.currentContacts];
+    newContacts.sort((first, second) => {
+      return second.popularity - first.popularity;
+    });
+    this.setState((previous) => {
+      return {
+        currentContacts: newContacts
+      };
+    });
+  };
   render() {
     return (
       <div className="App">
         <h1>IronContacts</h1>
         <div className="buttons-wrapper">
           <button onClick={this.addRandomContact}>Add Random Contact</button>
+          <button onClick={this.sortByName}>Sort by name</button>
+          <button onClick={this.sortByPopularity}>Sort by popularity</button>
         </div>
         <table>
           <thead>
@@ -69,6 +108,7 @@ class App extends Component {
               <th>Picture</th>
               <th>Name</th>
               <th>Popularity</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>{this.displayContacts()}</tbody>
