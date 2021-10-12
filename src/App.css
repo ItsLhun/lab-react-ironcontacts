@@ -1,7 +1,23 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
-
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
+}
+table {
+  align-self: center;
+  width: 35em;
+}
+table * {
+  margin-bottom: 0.5rem;
+}
+th {
+  font-size: 1.5rem;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +51,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.profile-img {
+  height: 8rem;
 }
