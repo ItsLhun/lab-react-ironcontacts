@@ -33,6 +33,7 @@ class App extends Component {
           </td>
           <td>
             <button
+              className="btn-delete"
               onClick={() => {
                 this.handleContactRemoval(contact.name);
               }}
