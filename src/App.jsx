@@ -4,8 +4,6 @@ import './App.css';
 
 import contacts from './contacts.json';
 
-const fiveContacts = contacts.slice(0, 5);
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -64,6 +62,9 @@ class App extends Component {
 
   addRandomContact = () => {
     //avoiding direct mutation of the state
+    if (this.state.remainingContacts.length === 0) {
+      return;
+    }
     const newContacts = [...this.state.currentContacts];
     const remainingContacts = [...this.state.remainingContacts];
 
